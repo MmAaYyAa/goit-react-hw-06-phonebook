@@ -7,6 +7,7 @@ import ContactsList from './ContactsList/ContactsList';
 import Filter from './Filter/Filter';
 import { nanoid } from 'nanoid';
 
+
 export const App =  () => {
 const[contacts,setContacts]= useState(()=>{
   return JSON.parse(window.localStorage.getItem('contacts'))?? [];
@@ -35,14 +36,14 @@ const[filter,setFilter]= useState('');
     window.localStorage.setItem('contacts',JSON.stringify(contacts));
   },[contacts]);
 
-  const deleteContacts = id => {
-    setContacts(prev => prev.filter(el => el.id !== id),
-    );
-  };
+  // const deleteContacts = id => {
+  //   setContacts(prev => prev.filter(el => el.id !== id),
+  //   );
+  // };
 
-  const handleFilter = ({ target: { value } }) => {
-    setFilter(value);
-  };
+  // const handleFilter = ({ target: { value } }) => {
+  //   setFilter(value);
+  // };
 
   // const filteredContacts = useMemo(() => {
   //   return contacts.filter(contact =>
@@ -61,10 +62,9 @@ const[filter,setFilter]= useState('');
           <ContactForm createContacts={createContacts}></ContactForm>
 
           {/* <h2>Contacts</h2> */}
-          <Filter handleFilter={handleFilter} filter={filter} />
+          <Filter />
           <ContactsList
             contacts={contacts}
-            deleteContacts={deleteContacts}
             filteredContacts={filteredContacts}
           ></ContactsList>
         </div>

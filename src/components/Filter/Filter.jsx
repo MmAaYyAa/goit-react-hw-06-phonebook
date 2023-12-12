@@ -1,6 +1,15 @@
+import {useSelector, useDispatch} from 'react-redux';
+import {filterContacts} from '../../redux/filterSlice';
 import { FilterText, FilterForm, FilterTitle } from './Filter.styled';
 import { Input } from '../ContactForm/ContactForm.styled';
-const Filter = ({ handleFilter, filter }) => {
+
+const Filter = () => {
+  const getFilter = state => state.filter;
+  const {filter} = useSelector(getFilter);
+  const dispatch = useDispatch();
+  const handleFilter =  ({ target: { value } })  => {
+    dispatch(filterContacts(value));
+     };
   return (
     <>
       <FilterTitle>Contacts</FilterTitle>
