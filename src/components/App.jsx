@@ -9,32 +9,32 @@ import { nanoid } from 'nanoid';
 
 
 export const App =  () => {
-const[contacts,setContacts]= useState(()=>{
-  return JSON.parse(window.localStorage.getItem('contacts'))?? [];
-});
+// const[contacts,setContacts]= useState(()=>{
+//   return JSON.parse(window.localStorage.getItem('contacts'))?? [];
+// });
 
-const[filter,setFilter]= useState('');
+// const[filter,setFilter]= useState('');
 
-  const createContacts = dataForm => {
-    const existingContact = contacts.find(
-      contact => contact.name.toLowerCase() === dataForm.name.toLowerCase()
-    );
-    if (existingContact) {
-      return alert(`${dataForm.name} is already in contacts`);
-    }
+//   const createContacts = dataForm => {
+//     const existingContact = contacts.find(
+//       contact => contact.name.toLowerCase() === dataForm.name.toLowerCase()
+//     );
+//     if (existingContact) {
+//       return alert(`${dataForm.name} is already in contacts`);
+//     }
 
-    const newContact = {
-      ...dataForm,
-      id: nanoid(),
-    };
+//     const newContact = {
+//       ...dataForm,
+//       id: nanoid(),
+//     };
 
-    setContacts( prev =>[newContact, ...prev],
-    );
-  };
+//     setContacts( prev =>[newContact, ...prev],
+//     );
+//   };
 
-  useEffect(()=>{
-    window.localStorage.setItem('contacts',JSON.stringify(contacts));
-  },[contacts]);
+//   useEffect(()=>{
+//     window.localStorage.setItem('contacts',JSON.stringify(contacts));
+//   },[contacts]);
 
   // const deleteContacts = id => {
   //   setContacts(prev => prev.filter(el => el.id !== id),
@@ -51,22 +51,18 @@ const[filter,setFilter]= useState('');
   //   );
   // }, [contacts,filter]);
 
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
+  // const filteredContacts = contacts.filter(contact =>
+  //   contact.name.toLowerCase().includes(filter.toLowerCase())
+  // );
 
     return (
       <>
         <div>
           {/* <h1>Phonebook</h1> */}
-          <ContactForm createContacts={createContacts}></ContactForm>
-
+          <ContactForm/>
           {/* <h2>Contacts</h2> */}
           <Filter />
-          <ContactsList
-            contacts={contacts}
-            filteredContacts={filteredContacts}
-          ></ContactsList>
+          <ContactsList/>
         </div>
       </>
     );

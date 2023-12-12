@@ -1,11 +1,25 @@
+import { useSelector } from 'react-redux';
 import Contact from 'components/Contact/Contact';
 
-const ContactsList = ({ contacts, filteredContacts, deleteContacts }) => {
+const ContactsList = () => {
+  const getContacts = state =>state.contacts;
+  const getFilter = state => state.filter;
+  const contacts = useSelector(getContacts );
+  const filter = useSelector(getFilter);
+ console.log(contacts)
+  const filteredContacts = (contacts, filter) =>{
+    if(!filter) return;
+
+    return contacts.filter(contact => 
+       contact.name.toLowerCase())
+  }
+
+  const visibleContacts = filteredContacts(contacts, filter);
+  
   return (
     <div>
-      {(filteredContacts ?? contacts).map(contact => (
+      {(visibleContacts ?? contacts).map(contact => (
         <Contact
-          deleteContacts={deleteContacts}
           contact={contact}
           key={contact.id}
         />
@@ -15,3 +29,6 @@ const ContactsList = ({ contacts, filteredContacts, deleteContacts }) => {
 };
 
 export default ContactsList;
+//const filteredContacts = contacts.filter(contact =>
+  //   contact.name.toLowerCase().includes(filter.toLowerCase())
+  // );

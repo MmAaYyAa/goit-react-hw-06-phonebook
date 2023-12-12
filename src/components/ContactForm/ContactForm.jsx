@@ -1,3 +1,5 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../../redux/contactsSlice';
 import { useState } from 'react';
 import {
   Form,
@@ -6,9 +8,12 @@ import {
   ContactFormTitle,
 } from './ContactForm.styled';
 
- export const ContactForm = ({createContacts})=> {
+ export const ContactForm = ()=> {
   const[name,setName]= useState('');
   const[number,setNumber]= useState('');
+  const getContacts = state =>state.contacts;
+  const contacts = useSelector(getContacts );
+  const dispatch = useDispatch();
 
   const handleInputChange = event => {
     if(event.target.name === 'name') setName(event.target.value.trim());
@@ -17,7 +22,14 @@ import {
 
   const handleFormSubmit = event => {
     event.preventDefault();
-    createContacts({name: name, number: number});
+   const dataForm = {name: name, number: number};
+   const existingContact = contacts.find(
+          contact => contact.name.toLowerCase() === dataForm.name.toLowerCase()
+         );
+        if (existingContact) {
+           return alert(`${dataForm.name} is already in contacts`);
+        }
+        dispatch(addContact(dataForm));
     setName('');
     setNumber('');
   };
@@ -58,3 +70,15 @@ import {
 }
 
 export default ContactForm;
+//const createContacts = dataForm => {
+  //     const existingContact = contacts.find(
+  //       contact => contact.name.toLowerCase() === dataForm.name.toLowerCase()
+  //     );
+  //     if (existingContact) {
+  //       return alert(`${dataForm.name} is already in contacts`);
+  //     }
+  
+  //     const newContact = {
+  //       ...dataForm,
+  //       id: nanoid(),
+  //     };
