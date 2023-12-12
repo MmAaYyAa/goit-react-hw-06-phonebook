@@ -1,11 +1,8 @@
 import React from 'react';
-import {useState} from 'react';
-import {useEffect} from 'react';
-//import {useMemo} from 'react';
 import ContactForm from './ContactForm/ContactForm';
 import ContactsList from './ContactsList/ContactsList';
 import Filter from './Filter/Filter';
-import { nanoid } from 'nanoid';
+
 
 
 export const App =  () => {
