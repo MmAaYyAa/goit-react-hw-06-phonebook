@@ -6,12 +6,13 @@ const ContactsList = () => {
   const getFilter = state => state.filter;
   const contacts = useSelector(getContacts );
   const filter = useSelector(getFilter);
- console.log(contacts)
+
   const filteredContacts = (contacts, filter) =>{
     if(!filter) return;
 
     return contacts.filter(contact => 
        contact.name.toLowerCase())
+   
   }
 
   const visibleContacts = filteredContacts(contacts, filter);
