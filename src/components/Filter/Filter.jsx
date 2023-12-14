@@ -4,7 +4,7 @@ import { FilterText, FilterForm, FilterTitle } from './Filter.styled';
 import { Input } from '../ContactForm/ContactForm.styled';
 
 const Filter = () => {
-  const getFilter = state => state.filter;
+  const getFilter = state => state.filter.filter;
   const {filter} = useSelector(getFilter);
   const dispatch = useDispatch();
   const handleFilter =  ({ target: { value } })  => {
